@@ -1,0 +1,213 @@
+{
+  "statuses": [
+    {
+      "id": "OPEN"
+    },
+    {
+      "id": "COMPLETED"
+    }
+  ],
+  "assignments": [
+    {
+      "id": "as_001",
+      "label": "TX-101",
+      "status": "COMPLETED",
+      "clients": [
+        "Samsung",
+        "DHL"
+      ],
+      "shipment_count": 3
+    },
+    {
+      "id": "as_002",
+      "label": "TX-102",
+      "status": "OPEN",
+      "clients": [
+        "DHL",
+        "CargoTrans",
+        "ShipCo"
+      ],
+      "shipment_count": 4
+    },
+    {
+      "id": "as_003",
+      "label": "TX-103",
+      "status": "COMPLETED",
+      "clients": [
+        "CargoTrans"
+      ],
+      "shipment_count": 5
+    },
+    {
+      "id": "as_004",
+      "label": "TX-104",
+      "status": "OPEN",
+      "clients": [
+        "ShipCo",
+        "Logix"
+      ],
+      "shipment_count": 6
+    },
+    {
+      "id": "as_005",
+      "label": "TX-105",
+      "status": "COMPLETED",
+      "clients": [
+        "Logix",
+        "Oceanic",
+        "Sony"
+      ],
+      "shipment_count": 7
+    },
+    {
+      "id": "as_006",
+      "label": "TX-106",
+      "status": "OPEN",
+      "clients": [
+        "Oceanic"
+      ],
+      "shipment_count": 2
+    },
+    {
+      "id": "as_007",
+      "label": "TX-107",
+      "status": "COMPLETED",
+      "clients": [
+        "Sony",
+        "Samsung"
+      ],
+      "shipment_count": 3
+    },
+    {
+      "id": "as_008",
+      "label": "TX-108",
+      "status": "OPEN",
+      "clients": [
+        "Samsung",
+        "DHL",
+        "CargoTrans"
+      ],
+      "shipment_count": 4
+    },
+    {
+      "id": "as_009",
+      "label": "TX-109",
+      "status": "COMPLETED",
+      "clients": [
+        "DHL"
+      ],
+      "shipment_count": 5
+    },
+    {
+      "id": "as_010",
+      "label": "TX-110",
+      "status": "OPEN",
+      "clients": [
+        "CargoTrans",
+        "ShipCo"
+      ],
+      "shipment_count": 6
+    },
+    {
+      "id": "as_011",
+      "label": "TX-111",
+      "status": "COMPLETED",
+      "clients": [
+        "ShipCo",
+        "Logix",
+        "Oceanic"
+      ],
+      "shipment_count": 7
+    },
+    {
+      "id": "as_012",
+      "label": "TX-112",
+      "status": "OPEN",
+      "clients": [
+        "Logix"
+      ],
+      "shipment_count": 2
+    },
+    {
+      "id": "as_013",
+      "label": "TX-113",
+      "status": "COMPLETED",
+      "clients": [
+        "Oceanic",
+        "Sony"
+      ],
+      "shipment_count": 3
+    },
+    {
+      "id": "as_014",
+      "label": "TX-114",
+      "status": "OPEN",
+      "clients": [
+        "Sony",
+        "Samsung",
+        "DHL"
+      ],
+      "shipment_count": 4
+    },
+    {
+      "id": "as_015",
+      "label": "TX-115",
+      "status": "COMPLETED",
+      "clients": [
+        "Samsung"
+      ],
+      "shipment_count": 5
+    },
+    {
+      "id": "as_016",
+      "label": "TX-116",
+      "status": "OPEN",
+      "clients": [
+        "DHL",
+        "CargoTrans"
+      ],
+      "shipment_count": 6
+    },
+    {
+      "id": "as_017",
+      "label": "TX-117",
+      "status": "COMPLETED",
+      "clients": [
+        "CargoTrans",
+        "ShipCo",
+        "Logix"
+      ],
+      "shipment_count": 7
+    },
+    {
+      "id": "as_018",
+      "label": "TX-118",
+      "status": "OPEN",
+      "clients": [
+        "ShipCo"
+      ],
+      "shipment_count": 2
+    },
+    {
+      "id": "as_019",
+      "label": "TX-119",
+      "status": "COMPLETED",
+      "clients": [
+        "Logix",
+        "Oceanic"
+      ],
+      "shipment_count": 3
+    },
+    {
+      "id": "as_020",
+      "label": "TX-120",
+      "status": "OPEN",
+      "clients": [
+        "Oceanic",
+        "Sony",
+        "Samsung"
+      ],
+      "shipment_count": 4
+    }
+  ]
+}
