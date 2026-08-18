@@ -1,7 +1,6 @@
 "use client";
 
 import { Package } from "lucide-react";
-import type { ReactNode } from "react";
 import { ShipmentDetailForm } from "@/components/shipments/shipments-detail/shipment-detail-form";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -23,15 +22,9 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useShipment } from "@/hooks/use-shipment-queries";
 import { formatDateTime, formatStatus } from "@/lib/format";
+import { shipmentStatusClassName } from "@/lib/shipment-status";
+import { cn } from "@/lib/utils";
 import { useShipmentUiStore } from "@/stores/shipment-ui-store";
-
-function ReadOnlyValue({ children }: { children: ReactNode }) {
-  return (
-    <p className="text-sm">
-      {children || "—"}
-    </p>
-  );
-}
 
 export function ShipmentDetailPanel() {
   const selectedShipmentId = useShipmentUiStore((state) => state.selectedShipmentId);
@@ -90,27 +83,32 @@ export function ShipmentDetailPanel() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field>
                 <FieldLabel>Client</FieldLabel>
-                <ReadOnlyValue>{shipment.client_name}</ReadOnlyValue>
+                <p className="text-sm">{shipment.client_name}</p>
               </Field>
               <Field>
                 <FieldLabel>Label</FieldLabel>
-                <ReadOnlyValue>{shipment.label}</ReadOnlyValue>
+                <p className="text-sm">{shipment.label}</p>
               </Field>
               <Field>
                 <FieldLabel>Status</FieldLabel>
-                <Badge variant="secondary">{formatStatus(shipment.status)}</Badge>
+                <Badge
+                  variant="secondary"
+                  className={cn("w-fit! capitalize", shipmentStatusClassName(shipment.status))}
+                >
+                  {formatStatus(shipment.status).toLowerCase()}
+                </Badge>
               </Field>
               <Field>
                 <FieldLabel>Arrival date</FieldLabel>
-                <ReadOnlyValue>{formatDateTime(shipment.arrival_date)}</ReadOnlyValue>
+                <p className="text-sm">{formatDateTime(shipment.arrival_date)}</p>
               </Field>
               <Field>
                 <FieldLabel>Warehouse</FieldLabel>
-                <ReadOnlyValue>{shipment.warehouse_id}</ReadOnlyValue>
+                <p className="text-sm">{shipment.warehouse_id}</p>
               </Field>
               <Field>
                 <FieldLabel>Assignment</FieldLabel>
-                <ReadOnlyValue>{shipment.assignment_id ?? "—"}</ReadOnlyValue>
+                <p className="text-sm">{shipment.assignment_id ?? "—"}</p>
               </Field>
             </div>
           </FieldGroup>

@@ -7,20 +7,27 @@ import {
   useQueryClient,
   type InfiniteData,
 } from "@tanstack/react-query";
-import { fetchShipment, fetchShipments, PAGE_SIZE, patchShipment } from "@/lib/api";
-import { shipmentKeys } from "@/lib/query-keys";
+import { getShipment, getShipments, updateShipment } from "@/api/shipment";
 import type { Shipment, ShipmentStatus, ShipmentUpdate } from "@/types/shipments";
 import type { PaginatedResponse } from "@/types";
+
+export const shipmentKeys = {
+  all: ["shipments"] as const,
+  lists: () => [...shipmentKeys.all, "list"] as const,
+  list: (status: ShipmentStatus, q: string) =>
+    [...shipmentKeys.lists(), status, q] as const,
+  details: () => [...shipmentKeys.all, "detail"] as const,
+  detail: (id: string) => [...shipmentKeys.details(), id] as const,
+};
 
 export function useShipments(status: ShipmentStatus, q: string) {
   return useInfiniteQuery({
     queryKey: shipmentKeys.list(status, q),
     queryFn: ({ pageParam }) =>
-      fetchShipments({
+      getShipments({
         status,
         q,
         page: pageParam,
-        perPage: PAGE_SIZE,
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.next ?? undefined,
@@ -32,7 +39,7 @@ export function useShipment(id: string | null) {
 
   return useQuery({
     queryKey: shipmentKeys.detail(id ?? ""),
-    queryFn: () => fetchShipment(id!),
+    queryFn: () => getShipment(id!),
     enabled: Boolean(id),
     placeholderData: () => {
       if (!id) return undefined;
@@ -55,7 +62,7 @@ export function useUpdateShipment() {
 
   return useMutation({
     mutationFn: ({ id, update }: { id: string; update: ShipmentUpdate }) =>
-      patchShipment(id, update),
+      updateShipment(id, update),
     onSuccess: (shipment) => {
       queryClient.setQueryData(shipmentKeys.detail(shipment.id), shipment);
       void queryClient.invalidateQueries({ queryKey: shipmentKeys.lists() });

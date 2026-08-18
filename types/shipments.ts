@@ -17,3 +17,10 @@ export type Shipment = {
 };
 
 export type ShipmentUpdate = Pick<Shipment, "delivery_by_date" | "lat" | "lng">;
+
+export type ListShipmentsParams = {
+  status: ShipmentStatus;
+  q?: string;
+  page: number;
+  perPage?: number;
+};

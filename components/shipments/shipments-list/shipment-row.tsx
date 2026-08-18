@@ -25,7 +25,7 @@ export function ShipmentRow({ shipment, selected, onSelect }: ShipmentRowProps) 
       <span className="truncate text-sm font-medium">{shipment.client_name}</span>
       <span className="truncate text-xs text-muted-foreground">{shipment.label}</span>
       <span className="text-xs text-muted-foreground">
-        {formatDate(shipment.arrival_date)}
+        <b>Arrival:</b> {formatDate(shipment.arrival_date)}
       </span>
     </button>
   );

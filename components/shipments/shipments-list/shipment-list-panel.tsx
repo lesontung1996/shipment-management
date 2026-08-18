@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import { ShipmentSearch } from "@/components/shipments/shipments-list/shipment-search";
+import { ShipmentStatusFilters } from "@/components/shipments/shipments-list/shipment-status-filters";
 import { ShipmentStatusGroup } from "@/components/shipments/shipments-list/shipment-status-group";
 import { Separator } from "@/components/ui/separator";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
-import { SHIPMENT_STATUSES } from "@/types/shipments";
+import { SHIPMENT_STATUSES, type ShipmentStatus } from "@/types/shipments";
 
 export function ShipmentListPanel() {
   const [search, setSearch] = useState("");
+  const [status, setStatus] = useState<ShipmentStatus>(SHIPMENT_STATUSES[0]);
   const q = useDebouncedValue(search.trim(), 300);
 
   return (
@@ -16,12 +18,11 @@ export function ShipmentListPanel() {
       <div className="flex shrink-0 flex-col gap-3 p-3">
         <h1 className="text-base font-semibold tracking-tight">Shipments</h1>
         <ShipmentSearch value={search} onChange={setSearch} />
+        <ShipmentStatusFilters value={status} onChange={setStatus} />
       </div>
       <Separator />
       <div className="flex min-h-0 flex-1 flex-col">
-        {SHIPMENT_STATUSES.map((status) => (
-          <ShipmentStatusGroup key={status} status={status} q={q} />
-        ))}
+        <ShipmentStatusGroup key={status} status={status} q={q} />
       </div>
     </aside>
   );

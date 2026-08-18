@@ -2,14 +2,14 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { ChevronDown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Collapsible, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ShipmentRow } from "@/components/shipments/shipments-list/shipment-row";
 import { useShipments } from "@/hooks/use-shipment-queries";
 import { formatStatus } from "@/lib/format";
+import { shipmentStatusClassName } from "@/lib/shipment-status";
+import { cn } from "@/lib/utils";
 import type { ShipmentStatus } from "@/types/shipments";
 import { useShipmentUiStore } from "@/stores/shipment-ui-store";
 
@@ -42,7 +42,6 @@ export function ShipmentStatusGroup({ status, q }: ShipmentStatusGroupProps) {
   );
   const total = data?.pages[0]?.items ?? 0;
 
-  // eslint-disable-next-line react-hooks/incompatible-library
   const virtualizer = useVirtualizer({
     count: shipments.length,
     getScrollElement: () => parentRef.current,
@@ -71,16 +70,19 @@ export function ShipmentStatusGroup({ status, q }: ShipmentStatusGroupProps) {
   ]);
 
   return (
-    <Collapsible
-      defaultOpen
-      className="group flex min-h-0 flex-col overflow-hidden border-b data-open:min-h-35 data-open:flex-1"
-    >
-      <CollapsibleTrigger className="flex w-full shrink-0 items-center gap-2 px-3 py-2 text-left hover:bg-muted/50">
-        <ChevronDown className="size-4 shrink-0 text-muted-foreground transition-transform group-data-open:rotate-180" />
-        <span className="text-sm font-medium">{formatStatus(status)}</span>
-        <Badge variant="secondary">{isPending ? "…" : total}</Badge>
-      </CollapsibleTrigger>
-      <div className="hidden min-h-0 flex-1 flex-col overflow-hidden group-data-open:flex">
+    <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+      <div className="flex w-full shrink-0 items-center gap-2 px-3 py-2">
+        <span className="text-sm font-medium capitalize">
+          {formatStatus(status).toLowerCase()}
+        </span>
+        <Badge
+          variant="secondary"
+          className={cn(shipmentStatusClassName(status))}
+        >
+          {isPending ? "…" : total}
+        </Badge>
+      </div>
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
         {isPending ? (
           <div className="flex flex-col gap-2 px-3 py-2">
             {Array.from({ length: 4 }, (_, index) => (
@@ -132,6 +134,6 @@ export function ShipmentStatusGroup({ status, q }: ShipmentStatusGroupProps) {
           </div>
         )}
       </div>
-    </Collapsible>
+    </div>
   );
 }
