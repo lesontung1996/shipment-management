@@ -10,14 +10,25 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { useUpdateShipment } from "@/hooks/use-shipment-queries";
+import { useAssignments, useUpdateShipment } from "@/hooks/use-shipment-queries";
 import { fromDatetimeLocal, toDatetimeLocal } from "@/lib/format";
-import type { Shipment } from "@/types/shipments";
+import type { Shipment, ShipmentStatus } from "@/types/shipments";
+import { getStatusOptions } from "@/types/shipments";
+import { AssignmentCombobox } from "@/components/assignments/assignments-list/assignment-combobox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type FormState = {
   delivery_by_date: string;
   lat: string;
   lng: string;
+  status: ShipmentStatus;
+  assignment_id: string;
 };
 
 function toFormState(shipment: Shipment): FormState {
@@ -25,6 +36,8 @@ function toFormState(shipment: Shipment): FormState {
     delivery_by_date: toDatetimeLocal(shipment.delivery_by_date),
     lat: String(shipment.lat),
     lng: String(shipment.lng),
+    status: shipment.status,
+    assignment_id: shipment.assignment_id ?? "",
   };
 }
 
@@ -32,15 +45,24 @@ type ShipmentDetailFormProps = {
   shipment: Shipment;
 };
 
+const STATUS_LABELS: Record<ShipmentStatus, string> = {
+  OPEN: "Open",
+  IN_TRANSIT: "In Transit",
+  DELIVERED: "Delivered",
+};
+
 export function ShipmentDetailForm({ shipment }: ShipmentDetailFormProps) {
   const [form, setForm] = useState<FormState>(() => toFormState(shipment));
   const updateShipment = useUpdateShipment();
+  const assignmentsQuery = useAssignments();
 
   const baseline = useMemo(() => toFormState(shipment), [shipment]);
   const isDirty =
     form.delivery_by_date !== baseline.delivery_by_date ||
     form.lat !== baseline.lat ||
-    form.lng !== baseline.lng;
+    form.lng !== baseline.lng ||
+    form.status !== baseline.status ||
+    form.assignment_id !== baseline.assignment_id;
 
   const lat = Number(form.lat);
   const lng = Number(form.lng);
@@ -57,24 +79,92 @@ export function ShipmentDetailForm({ shipment }: ShipmentDetailFormProps) {
     !form.delivery_by_date || Number.isNaN(dateMs)
       ? "Delivery-by date is required."
       : undefined;
-  const isValid = !latError && !lngError && !dateError;
+
+  const needsAssignment = form.status === "IN_TRANSIT";
+  const assignmentError =
+    needsAssignment && !form.assignment_id
+      ? "An assignment is required to move to In Transit."
+      : undefined;
+
+  const isValid = !latError && !lngError && !dateError && !assignmentError;
+
+  const statusOptions = getStatusOptions(shipment.status);
+
+  function handleStatusChange(next: ShipmentStatus) {
+    setForm((current) => {
+      const cleared =
+        next === "OPEN" || next === "DELIVERED"
+          ? { assignment_id: "" }
+          : {};
+      return { ...current, ...cleared, status: next };
+    });
+  }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!isValid) return;
-    updateShipment.mutate({
-      id: shipment.id,
-      update: {
-        delivery_by_date: fromDatetimeLocal(form.delivery_by_date),
-        lat,
-        lng,
-      },
-    });
+
+    const statusChanged = form.status !== shipment.status;
+    const update: Parameters<typeof updateShipment.mutate>[0]["update"] = {
+      delivery_by_date: fromDatetimeLocal(form.delivery_by_date),
+      lat,
+      lng,
+    };
+
+    if (statusChanged) {
+      update.status = form.status;
+      if (form.status === "IN_TRANSIT") {
+        update.assignment_id = form.assignment_id || null;
+      } else if (form.status === "OPEN" || form.status === "DELIVERED") {
+        update.assignment_id = null;
+      }
+    }
+
+    updateShipment.mutate({ id: shipment.id, update });
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <FieldGroup>
+        <Field>
+          <FieldLabel>Status</FieldLabel>
+          <Select
+            value={form.status}
+            onValueChange={(v) => handleStatusChange(v as ShipmentStatus)}
+            disabled={statusOptions.length <= 1}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {statusOptions.map((s) => (
+                <SelectItem key={s} value={s}>
+                  {STATUS_LABELS[s]}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </Field>
+
+        {needsAssignment && (
+          <Field>
+            <FieldLabel>Assignment</FieldLabel>
+            <AssignmentCombobox
+              assignments={assignmentsQuery.data ?? []}
+              value={form.assignment_id}
+              onValueChange={(assignmentId) =>
+                setForm((current) => ({
+                  ...current,
+                  assignment_id: assignmentId,
+                }))
+              }
+              invalid={Boolean(assignmentError)}
+              disabled={assignmentsQuery.isLoading}
+            />
+            <FieldError>{assignmentError}</FieldError>
+          </Field>
+        )}
+
         <Field>
           <FieldLabel htmlFor="delivery_by_date">Delivery by</FieldLabel>
           <Input

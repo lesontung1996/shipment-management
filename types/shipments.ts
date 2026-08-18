@@ -16,7 +16,28 @@ export type Shipment = {
   lng: number;
 };
 
-export type ShipmentUpdate = Pick<Shipment, "delivery_by_date" | "lat" | "lng">;
+export type ShipmentUpdate = Partial<Pick<Shipment, "delivery_by_date" | "lat" | "lng" | "status" | "assignment_id">>;
+
+export type Assignment = {
+  id: string;
+  label: string;
+  status: string;
+  clients: string[];
+  shipment_count: number;
+};
+
+/** Returns all statuses available in the dropdown for a given current status,
+ *  including the current one so it is always pre-selected. */
+export function getStatusOptions(current: ShipmentStatus): ShipmentStatus[] {
+  switch (current) {
+    case "OPEN":
+      return ["OPEN", "IN_TRANSIT"];
+    case "IN_TRANSIT":
+      return ["OPEN", "IN_TRANSIT", "DELIVERED"];
+    case "DELIVERED":
+      return ["IN_TRANSIT", "DELIVERED"];
+  }
+}
 
 export type ListShipmentsParams = {
   status: ShipmentStatus;

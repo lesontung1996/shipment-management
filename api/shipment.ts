@@ -1,4 +1,5 @@
 import type {
+  Assignment,
   Shipment,
   ShipmentUpdate,
   ListShipmentsParams,
@@ -29,4 +30,9 @@ export async function updateShipment(
       body: JSON.stringify(update),
     })
   );
+}
+
+export async function getAssignments(): Promise<Assignment[]> {
+  const res = await fetch("/api/assignments");
+  return parseJson<Assignment[]>(res);
 }

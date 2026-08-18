@@ -7,7 +7,7 @@ import {
   useQueryClient,
   type InfiniteData,
 } from "@tanstack/react-query";
-import { getShipment, getShipments, updateShipment } from "@/api/shipment";
+import { getAssignments, getShipment, getShipments, updateShipment } from "@/api/shipment";
 import type { Shipment, ShipmentStatus, ShipmentUpdate } from "@/types/shipments";
 import type { PaginatedResponse } from "@/types";
 
@@ -54,6 +54,13 @@ export function useShipment(id: string | null) {
       }
       return undefined;
     },
+  });
+}
+
+export function useAssignments() {
+  return useQuery({
+    queryKey: ["assignments"],
+    queryFn: getAssignments,
   });
 }
 

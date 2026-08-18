@@ -17,7 +17,7 @@
       "label": "LAX-581-250521-1",
       "status": "IN_TRANSIT",
       "arrival_date": "2026-08-11T10:28:10.981Z",
-      "delivery_by_date": "2026-08-13T10:28:10.981Z",
+      "delivery_by_date": "2026-08-13T10:28:00.000Z",
       "eta": "2026-08-13T09:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.99750580215366,
@@ -27,25 +27,27 @@
       "id": "shp_002",
       "client_name": "DHL",
       "label": "JFK-581-250522-2",
-      "status": "DELIVERED",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-12T10:28:10.981Z",
-      "delivery_by_date": "2026-08-14T10:28:10.981Z",
+      "delivery_by_date": "2026-08-14T10:28:00.000Z",
       "eta": "2026-08-12T18:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.63333435693185,
-      "lng": -96.7692277258718
+      "lng": -96.7692277258718,
+      "assignment_id": "as_004"
     },
     {
       "id": "shp_003",
       "client_name": "CargoTrans",
       "label": "SFO-581-250523-3",
-      "status": "OPEN",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-15T10:28:10.981Z",
       "delivery_by_date": "2026-08-17T10:31:00.000Z",
       "eta": "2026-08-16T15:28:10.981Z",
       "warehouse_id": "581",
       "lat": 52.94485945900922,
-      "lng": -57.04775319381271
+      "lng": -57.04775319381271,
+      "assignment_id": "as_002"
     },
     {
       "id": "shp_004",
@@ -53,7 +55,7 @@
       "label": "SEA-581-250524-4",
       "status": "IN_TRANSIT",
       "arrival_date": "2026-08-11T10:28:10.981Z",
-      "delivery_by_date": "2026-08-13T10:28:10.981Z",
+      "delivery_by_date": "2026-08-13T10:28:00.000Z",
       "eta": "2026-08-12T21:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.75782813285462,
@@ -63,25 +65,27 @@
       "id": "shp_005",
       "client_name": "Logix",
       "label": "EWR-581-250525-5",
-      "status": "DELIVERED",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-15T10:28:10.981Z",
-      "delivery_by_date": "2026-08-17T10:28:10.981Z",
+      "delivery_by_date": "2026-08-17T10:28:00.000Z",
       "eta": "2026-08-15T20:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.72841161389247,
-      "lng": -96.86151092234546
+      "lng": -96.86151092234546,
+      "assignment_id": null
     },
     {
       "id": "shp_006",
       "client_name": "Oceanic",
       "label": "LAX-581-250526-6",
-      "status": "OPEN",
+      "status": "DELIVERED",
       "arrival_date": "2026-08-17T10:28:10.981Z",
-      "delivery_by_date": "2026-08-19T10:28:10.981Z",
+      "delivery_by_date": "2026-08-19T10:28:00.000Z",
       "eta": "2026-08-18T11:28:10.981Z",
       "warehouse_id": "581",
       "lat": 33.03206051744974,
-      "lng": -96.60039609017544
+      "lng": -96.60039609017544,
+      "assignment_id": "as_007"
     },
     {
       "id": "shp_007",
@@ -99,13 +103,14 @@
       "id": "shp_008",
       "client_name": "Samsung",
       "label": "SFO-581-250528-8",
-      "status": "DELIVERED",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-11T10:28:10.981Z",
-      "delivery_by_date": "2026-08-13T10:28:10.981Z",
+      "delivery_by_date": "2026-08-13T10:28:00.000Z",
       "eta": "2026-08-11T19:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.93134821241365,
-      "lng": -96.713117149059
+      "lng": -96.713117149059,
+      "assignment_id": "as_002"
     },
     {
       "id": "shp_009",
@@ -147,13 +152,14 @@
       "id": "shp_012",
       "client_name": "Logix",
       "label": "JFK-581-250522-12",
-      "status": "OPEN",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-16T10:28:10.981Z",
-      "delivery_by_date": "2026-08-18T10:28:10.981Z",
+      "delivery_by_date": "2026-08-18T10:28:00.000Z",
       "eta": "2026-08-16T13:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.843791274400274,
-      "lng": -96.91389960629992
+      "lng": -96.91389960629992,
+      "assignment_id": "as_004"
     },
     {
       "id": "shp_013",
@@ -183,13 +189,14 @@
       "id": "shp_015",
       "client_name": "Samsung",
       "label": "EWR-581-250525-15",
-      "status": "OPEN",
+      "status": "DELIVERED",
       "arrival_date": "2026-08-15T10:28:10.981Z",
       "delivery_by_date": "2026-08-17T10:28:00.000Z",
       "eta": "2026-08-17T00:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.963311383870554,
-      "lng": -96.5511064965818
+      "lng": -96.5511064965818,
+      "assignment_id": "as_002"
     },
     {
       "id": "shp_016",
@@ -219,13 +226,14 @@
       "id": "shp_018",
       "client_name": "ShipCo",
       "label": "SFO-581-250528-18",
-      "status": "OPEN",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-17T10:28:10.981Z",
-      "delivery_by_date": "2026-08-19T10:28:10.981Z",
+      "delivery_by_date": "2026-08-19T10:28:00.000Z",
       "eta": "2026-08-17T23:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.99836591084685,
-      "lng": -97.3282980384756
+      "lng": -97.3282980384756,
+      "assignment_id": "as_019"
     },
     {
       "id": "shp_019",
@@ -399,13 +407,14 @@
       "id": "shp_033",
       "client_name": "Logix",
       "label": "SFO-581-250523-33",
-      "status": "OPEN",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-09T10:28:10.981Z",
-      "delivery_by_date": "2026-08-11T10:28:10.981Z",
+      "delivery_by_date": "2026-08-11T10:28:00.000Z",
       "eta": "2026-08-10T19:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.69676697091979,
-      "lng": -97.24444047801327
+      "lng": -97.24444047801327,
+      "assignment_id": "as_005"
     },
     {
       "id": "shp_034",
@@ -1210,6 +1219,209 @@
       "warehouse_id": "581",
       "lat": 32.979295300509456,
       "lng": -97.10162701589161
+    }
+  ],
+  "assignments": [
+    {
+      "id": "as_001",
+      "label": "TX-101",
+      "status": "COMPLETED",
+      "clients": [
+        "Samsung",
+        "DHL"
+      ],
+      "shipment_count": 3
+    },
+    {
+      "id": "as_002",
+      "label": "TX-102",
+      "status": "OPEN",
+      "clients": [
+        "DHL",
+        "CargoTrans",
+        "ShipCo"
+      ],
+      "shipment_count": 4
+    },
+    {
+      "id": "as_003",
+      "label": "TX-103",
+      "status": "COMPLETED",
+      "clients": [
+        "CargoTrans"
+      ],
+      "shipment_count": 5
+    },
+    {
+      "id": "as_004",
+      "label": "TX-104",
+      "status": "OPEN",
+      "clients": [
+        "ShipCo",
+        "Logix"
+      ],
+      "shipment_count": 6
+    },
+    {
+      "id": "as_005",
+      "label": "TX-105",
+      "status": "COMPLETED",
+      "clients": [
+        "Logix",
+        "Oceanic",
+        "Sony"
+      ],
+      "shipment_count": 7
+    },
+    {
+      "id": "as_006",
+      "label": "TX-106",
+      "status": "OPEN",
+      "clients": [
+        "Oceanic"
+      ],
+      "shipment_count": 2
+    },
+    {
+      "id": "as_007",
+      "label": "TX-107",
+      "status": "COMPLETED",
+      "clients": [
+        "Sony",
+        "Samsung"
+      ],
+      "shipment_count": 3
+    },
+    {
+      "id": "as_008",
+      "label": "TX-108",
+      "status": "OPEN",
+      "clients": [
+        "Samsung",
+        "DHL",
+        "CargoTrans"
+      ],
+      "shipment_count": 4
+    },
+    {
+      "id": "as_009",
+      "label": "TX-109",
+      "status": "COMPLETED",
+      "clients": [
+        "DHL"
+      ],
+      "shipment_count": 5
+    },
+    {
+      "id": "as_010",
+      "label": "TX-110",
+      "status": "OPEN",
+      "clients": [
+        "CargoTrans",
+        "ShipCo"
+      ],
+      "shipment_count": 6
+    },
+    {
+      "id": "as_011",
+      "label": "TX-111",
+      "status": "COMPLETED",
+      "clients": [
+        "ShipCo",
+        "Logix",
+        "Oceanic"
+      ],
+      "shipment_count": 7
+    },
+    {
+      "id": "as_012",
+      "label": "TX-112",
+      "status": "OPEN",
+      "clients": [
+        "Logix"
+      ],
+      "shipment_count": 2
+    },
+    {
+      "id": "as_013",
+      "label": "TX-113",
+      "status": "COMPLETED",
+      "clients": [
+        "Oceanic",
+        "Sony"
+      ],
+      "shipment_count": 3
+    },
+    {
+      "id": "as_014",
+      "label": "TX-114",
+      "status": "OPEN",
+      "clients": [
+        "Sony",
+        "Samsung",
+        "DHL"
+      ],
+      "shipment_count": 4
+    },
+    {
+      "id": "as_015",
+      "label": "TX-115",
+      "status": "COMPLETED",
+      "clients": [
+        "Samsung"
+      ],
+      "shipment_count": 5
+    },
+    {
+      "id": "as_016",
+      "label": "TX-116",
+      "status": "OPEN",
+      "clients": [
+        "DHL",
+        "CargoTrans"
+      ],
+      "shipment_count": 6
+    },
+    {
+      "id": "as_017",
+      "label": "TX-117",
+      "status": "COMPLETED",
+      "clients": [
+        "CargoTrans",
+        "ShipCo",
+        "Logix"
+      ],
+      "shipment_count": 7
+    },
+    {
+      "id": "as_018",
+      "label": "TX-118",
+      "status": "OPEN",
+      "clients": [
+        "ShipCo"
+      ],
+      "shipment_count": 2
+    },
+    {
+      "id": "as_019",
+      "label": "TX-119",
+      "status": "COMPLETED",
+      "clients": [
+        "Logix",
+        "Oceanic"
+      ],
+      "shipment_count": 3
+    },
+    {
+      "id": "as_020",
+      "label": "TX-120",
+      "status": "OPEN",
+      "clients": [
+        "Oceanic",
+        "Sony",
+        "Samsung"
+      ],
+      "shipment_count": 4
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
