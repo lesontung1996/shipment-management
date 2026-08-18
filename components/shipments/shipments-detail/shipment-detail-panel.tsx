@@ -2,6 +2,7 @@
 
 import { Package } from "lucide-react";
 import { ShipmentDetailForm } from "@/components/shipments/shipments-detail/shipment-detail-form";
+import { ShipmentMap } from "@/components/shipments/shipments-detail/shipment-map";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -55,7 +56,7 @@ export function ShipmentDetailPanel() {
       <section className="flex min-h-0 flex-col gap-4 p-6">
         <Skeleton className="h-7 w-48" />
         <Skeleton className="h-4 w-32" />
-        <Skeleton className="h-40 w-full" />
+        <Skeleton className="h-64 w-full" />
         <Skeleton className="h-24 w-full" />
       </section>
     );
@@ -79,6 +80,11 @@ export function ShipmentDetailPanel() {
           <CardDescription>{shipment.label}</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-5">
+          <ShipmentMap
+            lat={shipment.lat}
+            lng={shipment.lng}
+            label={shipment.label}
+          />
           <FieldGroup>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field>

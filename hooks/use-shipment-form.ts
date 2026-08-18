@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { fromDatetimeLocal, toDatetimeLocal } from "@/lib/format";
+import { isValidLatitude, isValidLongitude } from "@/lib/utils";
 import type { Shipment, ShipmentStatus } from "@/types/shipments";
 import { getStatusOptions } from "@/types/shipments";
 import { useAssignments } from "@/hooks/use-shipment-queries";
@@ -59,15 +60,10 @@ function validate(form: ShipmentFormState): ShipmentFormErrors {
   const dateMs = new Date(form.delivery_by_date).getTime();
   const errors: ShipmentFormErrors = {};
 
-  if (form.lat.trim() === "" || !Number.isFinite(lat) || lat < -90 || lat > 90) {
+  if (form.lat.trim() === "" || !isValidLatitude(lat)) {
     errors.lat = "Latitude must be a number between -90 and 90.";
   }
-  if (
-    form.lng.trim() === "" ||
-    !Number.isFinite(lng) ||
-    lng < -180 ||
-    lng > 180
-  ) {
+  if (form.lng.trim() === "" || !isValidLongitude(lng)) {
     errors.lng = "Longitude must be a number between -180 and 180.";
   }
   if (!form.delivery_by_date || Number.isNaN(dateMs)) {
