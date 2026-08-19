@@ -12,6 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useDeleteShipmentQuery } from "@/hooks/use-shipment-queries";
+import { useShipmentStore } from "@/stores/shipment-store";
 import type { Shipment } from "@/types/shipments";
 
 type DeleteShipmentDialogProps = {
@@ -74,7 +75,14 @@ export function DeleteShipmentDialog({
             disabled={deleteShipment.isPending}
             onClick={() =>
               deleteShipment.mutate(shipment.id, {
-                onSuccess: () => setOpen(false),
+                onSuccess: () => {
+                  const { selectedShipmentId, setSelectedShipmentId } =
+                    useShipmentStore.getState();
+                  if (selectedShipmentId === shipment.id) {
+                    setSelectedShipmentId(null);
+                  }
+                  setOpen(false);
+                },
               })
             }
           >

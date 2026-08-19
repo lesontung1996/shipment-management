@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { fromDatetimeLocal, toDatetimeLocal } from "@/lib/format";
+import { getStatusOptions } from "@/lib/shipment-status";
 import { isValidLatitude, isValidLongitude } from "@/lib/utils";
 import {
-  getStatusOptions,
   SHIPMENT_STATUSES,
   type Shipment,
   type ShipmentStatus,
@@ -100,11 +100,13 @@ export function toShipmentUpdate(
     update.lng = values.lng;
   }
 
-  const statusChanged = values.status !== current.status;
-  if (isShipmentUpdateField("status") && statusChanged) {
+  if (isShipmentUpdateField("status") && values.status !== current.status) {
     update.status = values.status;
   }
-  if (isShipmentUpdateField("assignment_id") && statusChanged) {
+  if (
+    isShipmentUpdateField("assignment_id") &&
+    (values.assignment_id || null) !== (current.assignment_id || null)
+  ) {
     update.assignment_id = values.assignment_id;
   }
 

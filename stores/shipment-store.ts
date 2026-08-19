@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-type ShipmentUiState = {
+type ShipmentState = {
   selectedShipmentId: string | null;
   setSelectedShipmentId: (id: string | null) => void;
 };
 
-export const useShipmentUiStore = create<ShipmentUiState>((set) => ({
+export const useShipmentStore = create<ShipmentState>((set) => ({
   selectedShipmentId: null,
   setSelectedShipmentId: (id) => set({ selectedShipmentId: id }),
 }));

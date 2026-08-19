@@ -30,3 +30,13 @@ export function shipmentStatusClassName(
 ) {
   return shipmentStatusColorClass[status][appearance];
 }
+
+const TRANSITIONS: Record<ShipmentStatus, readonly ShipmentStatus[]> = {
+  OPEN: ["IN_TRANSIT"],
+  IN_TRANSIT: ["OPEN", "DELIVERED"],
+  DELIVERED: [],
+};
+
+export function getStatusOptions(current: ShipmentStatus): ShipmentStatus[] {
+  return [current, ...TRANSITIONS[current]];
+}

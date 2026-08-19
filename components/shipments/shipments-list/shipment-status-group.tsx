@@ -11,7 +11,7 @@ import { formatStatus } from "@/lib/format";
 import { shipmentStatusClassName } from "@/lib/shipment-status";
 import { cn } from "@/lib/utils";
 import type { ShipmentStatus } from "@/types/shipments";
-import { useShipmentUiStore } from "@/stores/shipment-ui-store";
+import { useShipmentStore } from "@/stores/shipment-store";
 
 const ROW_HEIGHT = 64;
 
@@ -22,8 +22,8 @@ type ShipmentStatusGroupProps = {
 
 export function ShipmentStatusGroup({ status, q }: ShipmentStatusGroupProps) {
   const parentRef = useRef<HTMLDivElement>(null);
-  const selectedShipmentId = useShipmentUiStore((state) => state.selectedShipmentId);
-  const setSelectedShipmentId = useShipmentUiStore(
+  const selectedShipmentId = useShipmentStore((state) => state.selectedShipmentId);
+  const setSelectedShipmentId = useShipmentStore(
     (state) => state.setSelectedShipmentId
   );
 

@@ -12,11 +12,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useShipmentStore } from "@/stores/shipment-store";
 
 const FORM_ID = "new-shipment-form";
 
 export function NewShipmentDialog() {
   const [open, setOpen] = useState(false);
+  const setSelectedShipmentId = useShipmentStore(
+    (state) => state.setSelectedShipmentId
+  );
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -33,7 +37,10 @@ export function NewShipmentDialog() {
           key={String(open)}
           formId={FORM_ID}
           idPrefix="new-shipment"
-          onSuccess={() => setOpen(false)}
+          onSuccess={(shipment) => {
+            setSelectedShipmentId(shipment.id);
+            setOpen(false);
+          }}
           renderActions={({ canSubmit, isPending, isError }) => (
             <DialogFooter>
               {isError ? (

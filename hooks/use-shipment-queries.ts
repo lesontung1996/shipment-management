@@ -17,7 +17,6 @@ import {
 } from "@/api/shipment";
 import type { Shipment, ShipmentCreate, ShipmentStatus, ShipmentUpdate } from "@/types/shipments";
 import type { PaginatedResponse } from "@/types";
-import { useShipmentUiStore } from "@/stores/shipment-ui-store";
 
 export const shipmentKeys = {
   all: ["shipments"] as const,
@@ -79,8 +78,7 @@ export function useCreateShipmentQuery() {
     mutationFn: (shipment: ShipmentCreate) => createShipment(shipment),
     onSuccess: (shipment) => {
       queryClient.setQueryData(shipmentKeys.detail(shipment.id), shipment);
-      void queryClient.invalidateQueries({ queryKey: shipmentKeys.lists() });
-      useShipmentUiStore.getState().setSelectedShipmentId(shipment.id);
+      queryClient.invalidateQueries({ queryKey: shipmentKeys.lists() });
     },
   });
 }
@@ -93,7 +91,7 @@ export function useUpdateShipmentQuery() {
       updateShipment(id, update),
     onSuccess: (shipment) => {
       queryClient.setQueryData(shipmentKeys.detail(shipment.id), shipment);
-      void queryClient.invalidateQueries({ queryKey: shipmentKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: shipmentKeys.lists() });
     },
   });
 }
@@ -105,12 +103,7 @@ export function useDeleteShipmentQuery() {
     mutationFn: (id: string) => deleteShipment(id),
     onSuccess: (_data, id) => {
       queryClient.removeQueries({ queryKey: shipmentKeys.detail(id) });
-      void queryClient.invalidateQueries({ queryKey: shipmentKeys.lists() });
-      const { selectedShipmentId, setSelectedShipmentId } =
-        useShipmentUiStore.getState();
-      if (selectedShipmentId === id) {
-        setSelectedShipmentId(null);
-      }
+      queryClient.invalidateQueries({ queryKey: shipmentKeys.lists() });
     },
   });
 }
