@@ -43,6 +43,13 @@ export async function createShipment(shipment: ShipmentCreate): Promise<Shipment
   );
 }
 
+export async function deleteShipment(id: string): Promise<void> {
+  const response = await fetch(`/api/shipments/${id}`, { method: "DELETE" });
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+}
+
 export async function getAssignments(): Promise<Assignment[]> {
   const res = await fetch("/api/assignments");
   return parseJson<Assignment[]>(res);

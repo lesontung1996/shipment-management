@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { NewShipmentDialog } from "@/components/shipments/shipments-list/new-shipment-dialog";
+import { NewShipmentDialog } from "@/components/shipments/ui/new-shipment-dialog";
 import { ShipmentSearch } from "@/components/shipments/shipments-list/shipment-search";
 import { ShipmentStatusFilters } from "@/components/shipments/shipments-list/shipment-status-filters";
 import { ShipmentStatusGroup } from "@/components/shipments/shipments-list/shipment-status-group";

@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import { Controller } from "react-hook-form";
 import { AssignmentCombobox } from "@/components/assignments/assignments-list/assignment-combobox";
+import { DeleteShipmentDialog } from "@/components/shipments/ui/delete-shipment-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -147,6 +148,34 @@ export function ShipmentForm({
               <FieldError errors={[errors.label]} />
             </Field>
 
+            <Field data-invalid={Boolean(errors.delivery_by_date)}>
+              <FieldLabel htmlFor={fieldId(idPrefix, "delivery_by_date")}>
+                Delivery by
+              </FieldLabel>
+              <Input
+                id={fieldId(idPrefix, "delivery_by_date")}
+                type="datetime-local"
+                disabled={!isEditable(isUpdate, "delivery_by_date")}
+                aria-invalid={Boolean(errors.delivery_by_date)}
+                {...register("delivery_by_date")}
+              />
+              <FieldError errors={[errors.delivery_by_date]} />
+            </Field>
+
+            <Field data-invalid={Boolean(errors.arrival_date)}>
+              <FieldLabel htmlFor={fieldId(idPrefix, "arrival_date")}>
+                Arrival date
+              </FieldLabel>
+              <Input
+                id={fieldId(idPrefix, "arrival_date")}
+                type="datetime-local"
+                disabled={!isEditable(isUpdate, "arrival_date")}
+                aria-invalid={Boolean(errors.arrival_date)}
+                {...register("arrival_date")}
+              />
+              <FieldError errors={[errors.arrival_date]} />
+            </Field>
+
             <Field>
               <FieldLabel>Status</FieldLabel>
               <Controller
@@ -177,20 +206,6 @@ export function ShipmentForm({
               />
             </Field>
 
-            <Field data-invalid={Boolean(errors.arrival_date)}>
-              <FieldLabel htmlFor={fieldId(idPrefix, "arrival_date")}>
-                Arrival date
-              </FieldLabel>
-              <Input
-                id={fieldId(idPrefix, "arrival_date")}
-                type="datetime-local"
-                disabled={!isEditable(isUpdate, "arrival_date")}
-                aria-invalid={Boolean(errors.arrival_date)}
-                {...register("arrival_date")}
-              />
-              <FieldError errors={[errors.arrival_date]} />
-            </Field>
-
             <Field data-invalid={Boolean(errors.warehouse_id)}>
               <FieldLabel htmlFor={fieldId(idPrefix, "warehouse_id")}>
                 Warehouse
@@ -204,7 +219,7 @@ export function ShipmentForm({
               <FieldError errors={[errors.warehouse_id]} />
             </Field>
 
-            <Field data-invalid={Boolean(errors.assignment_id)}>
+            <Field className="sm:col-span-2" data-invalid={Boolean(errors.assignment_id)}>
               <FieldLabel>Assignment</FieldLabel>
               <Controller
                 name="assignment_id"
@@ -225,23 +240,6 @@ export function ShipmentForm({
                 )}
               />
               <FieldError errors={[errors.assignment_id]} />
-            </Field>
-
-            <Field
-              className="sm:col-span-2"
-              data-invalid={Boolean(errors.delivery_by_date)}
-            >
-              <FieldLabel htmlFor={fieldId(idPrefix, "delivery_by_date")}>
-                Delivery by
-              </FieldLabel>
-              <Input
-                id={fieldId(idPrefix, "delivery_by_date")}
-                type="datetime-local"
-                disabled={!isEditable(isUpdate, "delivery_by_date")}
-                aria-invalid={Boolean(errors.delivery_by_date)}
-                {...register("delivery_by_date")}
-              />
-              <FieldError errors={[errors.delivery_by_date]} />
             </Field>
 
             <Field data-invalid={Boolean(errors.lat)}>
@@ -285,15 +283,20 @@ export function ShipmentForm({
                   : "Could not create shipment. Try again."}
               </p>
             ) : null}
-            <Button type="submit" disabled={!canSubmit || isPending}>
-              {isPending
-                ? isUpdate
-                  ? "Saving…"
-                  : "Creating…"
-                : isUpdate
-                  ? "Save"
-                  : "Create"}
-            </Button>
+            <div className="flex gap-2">
+              {shipment && (
+                <DeleteShipmentDialog shipment={shipment} disabled={isPending} />
+              )}
+              <Button className="flex-1" type="submit" disabled={!canSubmit || isPending}>
+                {isPending
+                  ? isUpdate
+                    ? "Saving…"
+                    : "Creating…"
+                  : isUpdate
+                    ? "Save"
+                    : "Create"}
+              </Button>
+            </div>
           </div>
         )}
       </form>

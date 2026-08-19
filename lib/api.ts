@@ -1,6 +1,6 @@
 import type { ListShipmentsParams } from "@/types/shipments";
 
-export const PAGE_SIZE = 20;
+export const PAGE_SIZE = 50;
 
 export function buildListUrl({
   status,

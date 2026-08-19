@@ -197,9 +197,12 @@ export function useShipmentForm({
 
   function setStatus(next: ShipmentStatus) {
     form.setValue("status", next, { shouldDirty: true, shouldValidate: true });
-    if (next === "OPEN" || next === "DELIVERED") {
-      form.setValue("assignment_id", "", { shouldValidate: true });
+    if (next === "IN_TRANSIT") {
+      void form.trigger("assignment_id");
+      return;
     }
+    form.setValue("assignment_id", "", { shouldValidate: true });
+    form.clearErrors("assignment_id");
   }
 
   return {
