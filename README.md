@@ -2,6 +2,8 @@
 
 Take-home assignment for Jitsu. Shipments arrive at a warehouse, get assigned to a delivery route, and move through **OPEN → IN_TRANSIT → DELIVERED**. Invalid transitions (for example OPEN → DELIVERED) are not allowed.
 
+Here is a quick video of me walking through the application: https://www.loom.com/share/6aff0c9141854e728442d23073f641c2
+
 ## Prerequisites
 
 - **Node.js** 20.9 or later

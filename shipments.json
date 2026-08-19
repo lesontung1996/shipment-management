@@ -507,13 +507,14 @@
       "id": "shp_048",
       "client_name": "Oceanic",
       "label": "SFO-581-250528-48",
-      "status": "OPEN",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-16T10:28:10.981Z",
-      "delivery_by_date": "2026-08-18T10:28:10.981Z",
+      "delivery_by_date": "2026-08-18T10:28:00.000Z",
       "eta": "2026-08-17T02:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.87643568102964,
-      "lng": -97.39346979283161
+      "lng": -97.39346979283161,
+      "assignment_id": "as_002"
     },
     {
       "id": "shp_050",
@@ -531,13 +532,14 @@
       "id": "shp_051",
       "client_name": "DHL",
       "label": "LAX-581-250521-51",
-      "status": "OPEN",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-10T10:28:10.981Z",
-      "delivery_by_date": "2026-08-12T10:28:10.981Z",
+      "delivery_by_date": "2026-08-12T10:28:00.000Z",
       "eta": "2026-08-10T10:28:10.981Z",
       "warehouse_id": "581",
       "lat": 32.87129433022235,
-      "lng": -97.21330124026932
+      "lng": -97.21330124026932,
+      "assignment_id": "as_002"
     },
     {
       "id": "shp_053",
@@ -550,18 +552,6 @@
       "warehouse_id": "581",
       "lat": 32.96866197371022,
       "lng": -97.07519417801883
-    },
-    {
-      "id": "shp_054",
-      "client_name": "Logix",
-      "label": "SEA-581-250524-54",
-      "status": "OPEN",
-      "arrival_date": "2026-08-16T10:28:10.981Z",
-      "delivery_by_date": "2026-08-18T10:28:10.981Z",
-      "eta": "2026-08-17T05:28:10.981Z",
-      "warehouse_id": "581",
-      "lat": 32.98970552640672,
-      "lng": -97.25958231612196
     },
     {
       "id": "shp_055",
@@ -586,18 +576,6 @@
       "warehouse_id": "581",
       "lat": 32.62933324916661,
       "lng": -97.34585565640943
-    },
-    {
-      "id": "shp_057",
-      "client_name": "Samsung",
-      "label": "JFK-581-250527-57",
-      "status": "OPEN",
-      "arrival_date": "2026-08-16T10:28:10.981Z",
-      "delivery_by_date": "2026-08-18T10:28:10.981Z",
-      "eta": "2026-08-18T09:28:10.981Z",
-      "warehouse_id": "581",
-      "lat": 32.6241635556707,
-      "lng": -97.24341199876503
     },
     {
       "id": "shp_058",
@@ -766,18 +744,6 @@
       "warehouse_id": "581",
       "lat": 32.74577600115518,
       "lng": -96.73629400096195
-    },
-    {
-      "id": "shp_072",
-      "client_name": "DHL",
-      "label": "JFK-581-250522-72",
-      "status": "OPEN",
-      "arrival_date": "2026-08-16T10:28:10.981Z",
-      "delivery_by_date": "2026-08-18T10:28:10.981Z",
-      "eta": "2026-08-16T11:28:10.981Z",
-      "warehouse_id": "581",
-      "lat": 32.80111547631372,
-      "lng": -97.34654544875195
     },
     {
       "id": "shp_073",
@@ -1114,6 +1080,45 @@
       "warehouse_id": "581",
       "lat": 32.979295300509456,
       "lng": -97.10162701589161
+    },
+    {
+      "id": "2U6C566XUdI",
+      "client_name": "Tung",
+      "label": "Tung-001",
+      "warehouse_id": "581",
+      "arrival_date": "2026-08-19T10:23:00.000Z",
+      "delivery_by_date": "2026-08-21T10:23:00.000Z",
+      "lat": 32.8,
+      "lng": -96.95,
+      "status": "OPEN",
+      "assignment_id": null,
+      "eta": "2026-08-21T10:23:00.000Z"
+    },
+    {
+      "id": "Kijn98nS0cY",
+      "client_name": "Tung",
+      "label": "Tung-001",
+      "warehouse_id": "581",
+      "arrival_date": "2026-08-19T10:33:00.000Z",
+      "delivery_by_date": "2026-08-21T10:33:00.000Z",
+      "lat": 32.8,
+      "lng": -96.95,
+      "status": "OPEN",
+      "assignment_id": null,
+      "eta": "2026-08-21T10:33:00.000Z"
+    },
+    {
+      "id": "9Stw7qsRB_Y",
+      "client_name": "Tung",
+      "label": "Tung-002",
+      "warehouse_id": "581",
+      "arrival_date": "2026-08-19T10:39:00.000Z",
+      "delivery_by_date": "2026-08-21T10:39:00.000Z",
+      "lat": 32.8,
+      "lng": -96.95,
+      "status": "OPEN",
+      "assignment_id": null,
+      "eta": "2026-08-21T10:39:00.000Z"
     }
   ],
   "assignments": [
