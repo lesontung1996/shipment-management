@@ -1,9 +1,8 @@
 "use client";
 
 import { Package } from "lucide-react";
-import { ShipmentDetailForm } from "@/components/shipments/shipments-detail/shipment-detail-form";
+import { ShipmentForm } from "@/components/shipments/shipments-detail/shipment-form";
 import { ShipmentMap } from "@/components/shipments/shipments-detail/shipment-map";
-import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -18,18 +17,13 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useShipment } from "@/hooks/use-shipment-queries";
-import { formatDateTime, formatStatus } from "@/lib/format";
-import { shipmentStatusClassName } from "@/lib/shipment-status";
-import { cn } from "@/lib/utils";
+import { useShipmentQuery } from "@/hooks/use-shipment-queries";
 import { useShipmentUiStore } from "@/stores/shipment-ui-store";
 
 export function ShipmentDetailPanel() {
   const selectedShipmentId = useShipmentUiStore((state) => state.selectedShipmentId);
-  const { data: shipment, isPending, isError, isPlaceholderData } = useShipment(
+  const { data: shipment, isPending, isError, isPlaceholderData } = useShipmentQuery(
     selectedShipmentId
   );
 
@@ -85,41 +79,7 @@ export function ShipmentDetailPanel() {
             lng={shipment.lng}
             label={shipment.label}
           />
-          <FieldGroup>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <Field>
-                <FieldLabel>Client</FieldLabel>
-                <p className="text-sm">{shipment.client_name}</p>
-              </Field>
-              <Field>
-                <FieldLabel>Label</FieldLabel>
-                <p className="text-sm">{shipment.label}</p>
-              </Field>
-              <Field>
-                <FieldLabel>Status</FieldLabel>
-                <Badge
-                  variant="secondary"
-                  className={cn("w-fit! capitalize", shipmentStatusClassName(shipment.status))}
-                >
-                  {formatStatus(shipment.status).toLowerCase()}
-                </Badge>
-              </Field>
-              <Field>
-                <FieldLabel>Arrival date</FieldLabel>
-                <p className="text-sm">{formatDateTime(shipment.arrival_date)}</p>
-              </Field>
-              <Field>
-                <FieldLabel>Warehouse</FieldLabel>
-                <p className="text-sm">{shipment.warehouse_id}</p>
-              </Field>
-              <Field>
-                <FieldLabel>Assignment</FieldLabel>
-                <p className="text-sm">{shipment.assignment_id ?? "—"}</p>
-              </Field>
-            </div>
-          </FieldGroup>
-          <Separator />
-          <ShipmentDetailForm key={shipment.id} shipment={shipment} />
+          <ShipmentForm key={shipment.id} shipment={shipment} />
         </CardContent>
       </Card>
     </section>

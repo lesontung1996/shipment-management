@@ -116,13 +116,14 @@
       "id": "shp_009",
       "client_name": "DHL",
       "label": "SEA-581-250529-9",
-      "status": "OPEN",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-17T10:28:10.981Z",
       "delivery_by_date": "2026-08-19T10:28:00.000Z",
       "eta": "2026-08-17T11:28:10.981Z",
       "warehouse_id": "581",
       "lat": 42.718045125156294,
-      "lng": -96.37755394986088
+      "lng": -96.37755394986088,
+      "assignment_id": "as_003"
     },
     {
       "id": "shp_010",
@@ -1220,6 +1221,19 @@
       "warehouse_id": "581",
       "lat": 32.979295300509456,
       "lng": -97.10162701589161
+    },
+    {
+      "id": "U_5STHX2Jdk",
+      "client_name": "Tung",
+      "label": "Tung 001",
+      "warehouse_id": "581",
+      "arrival_date": "2026-08-18T15:55:00.000Z",
+      "delivery_by_date": "2026-08-20T15:55:00.000Z",
+      "lat": 32.8,
+      "lng": -96.95,
+      "status": "OPEN",
+      "assignment_id": null,
+      "eta": "2026-08-20T15:55:00.000Z"
     }
   ],
   "assignments": [

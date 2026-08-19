@@ -1,6 +1,7 @@
 import type {
   Assignment,
   Shipment,
+  ShipmentCreate,
   ShipmentUpdate,
   ListShipmentsParams,
 } from "@/types/shipments";
@@ -28,6 +29,16 @@ export async function updateShipment(
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(update),
+    })
+  );
+}
+
+export async function createShipment(shipment: ShipmentCreate): Promise<Shipment> {
+  return parseJson<Shipment>(
+    await fetch("/api/shipments", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(shipment),
     })
   );
 }

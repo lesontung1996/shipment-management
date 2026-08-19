@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { NewShipmentDialog } from "@/components/shipments/shipments-list/new-shipment-dialog";
 import { ShipmentSearch } from "@/components/shipments/shipments-list/shipment-search";
 import { ShipmentStatusFilters } from "@/components/shipments/shipments-list/shipment-status-filters";
 import { ShipmentStatusGroup } from "@/components/shipments/shipments-list/shipment-status-group";
@@ -16,7 +17,10 @@ export function ShipmentListPanel() {
   return (
     <aside className="flex min-h-0 flex-col border-r bg-background">
       <div className="flex shrink-0 flex-col gap-3 p-3">
-        <h1 className="text-base font-semibold tracking-tight">Shipments</h1>
+        <div className="flex items-center justify-between gap-2">
+          <h1 className="text-base font-semibold tracking-tight">Shipments</h1>
+          <NewShipmentDialog />
+        </div>
         <ShipmentSearch value={search} onChange={setSearch} />
         <ShipmentStatusFilters value={status} onChange={setStatus} />
       </div>

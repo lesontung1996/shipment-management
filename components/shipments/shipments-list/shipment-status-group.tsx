@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ShipmentRow } from "@/components/shipments/shipments-list/shipment-row";
-import { useShipments } from "@/hooks/use-shipment-queries";
+import { useShipmentsQuery } from "@/hooks/use-shipment-queries";
 import { formatStatus } from "@/lib/format";
 import { shipmentStatusClassName } from "@/lib/shipment-status";
 import { cn } from "@/lib/utils";
@@ -34,7 +34,7 @@ export function ShipmentStatusGroup({ status, q }: ShipmentStatusGroupProps) {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = useShipments(status, q);
+  } = useShipmentsQuery(status, q);
 
   const shipments = useMemo(
     () => data?.pages.flatMap((page) => page.data) ?? [],

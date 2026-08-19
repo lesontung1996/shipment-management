@@ -16,7 +16,17 @@ export type Shipment = {
   lng: number;
 };
 
-export type ShipmentUpdate = Partial<Pick<Shipment, "delivery_by_date" | "lat" | "lng" | "status" | "assignment_id">>;
+export type ShipmentUpdate = Partial<
+  Pick<Shipment, "delivery_by_date" | "lat" | "lng" | "status" | "assignment_id">
+>;
+
+export type ShipmentCreate = Omit<Shipment, "id"> & { id?: string };
+
+export const STATUS_LABELS: Record<ShipmentStatus, string> = {
+  OPEN: "Open",
+  IN_TRANSIT: "In Transit",
+  DELIVERED: "Delivered",
+};
 
 export type Assignment = {
   id: string;
