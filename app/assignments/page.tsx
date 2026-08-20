@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import { ShipmentManagementPage } from "@/components/shipments/shipment-management-page";
+import { AssignmentManagementPage } from "@/components/assignments/assignment-management-page";
 
-export default function Home() {
+export default function AssignmentsPage() {
   return (
     <Suspense
       fallback={
@@ -10,7 +10,7 @@ export default function Home() {
         </div>
       }
     >
-      <ShipmentManagementPage />
+      <AssignmentManagementPage />
     </Suspense>
   );
 }

@@ -23,6 +23,8 @@ export const shipmentKeys = {
   lists: () => [...shipmentKeys.all, "list"] as const,
   list: (status: ShipmentStatus, q: string) =>
     [...shipmentKeys.lists(), status, q] as const,
+  byAssignment: (assignmentId: string) =>
+    [...shipmentKeys.lists(), "assignment", assignmentId] as const,
   details: () => [...shipmentKeys.all, "detail"] as const,
   detail: (id: string) => [...shipmentKeys.details(), id] as const,
 };
@@ -41,6 +43,20 @@ export function useShipmentsQuery(status: ShipmentStatus, q: string) {
   });
 }
 
+export function useShipmentsByAssignmentQuery(assignmentId: string | null) {
+  return useQuery({
+    queryKey: shipmentKeys.byAssignment(assignmentId ?? ""),
+    queryFn: () =>
+      getShipments({
+        assignmentId: assignmentId!,
+        page: 1,
+        perPage: 100,
+      }),
+    enabled: Boolean(assignmentId),
+    select: (response) => response.data,
+  });
+}
+
 export function useShipmentQuery(id: string | null) {
   const queryClient = useQueryClient();
 
@@ -54,11 +70,24 @@ export function useShipmentQuery(id: string | null) {
         InfiniteData<PaginatedResponse<Shipment>>
       >({ queryKey: shipmentKeys.lists() });
       for (const [, data] of lists) {
-        const match = data?.pages
+        if (!data || !Array.isArray(data.pages)) continue;
+        const match = data.pages
           .flatMap((page) => page.data)
           .find((shipment) => shipment.id === id);
         if (match) return match;
       }
+
+      const byAssignment = queryClient.getQueriesData<
+        PaginatedResponse<Shipment>
+      >({
+        queryKey: [...shipmentKeys.lists(), "assignment"],
+      });
+      for (const [, data] of byAssignment) {
+        if (!data || !Array.isArray(data.data)) continue;
+        const match = data.data.find((shipment) => shipment.id === id);
+        if (match) return match;
+      }
+
       return undefined;
     },
   });

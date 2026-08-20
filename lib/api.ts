@@ -4,6 +4,7 @@ export const PAGE_SIZE = 50;
 
 export function buildListUrl({
   status,
+  assignmentId,
   q,
   page,
   perPage = PAGE_SIZE,
@@ -13,8 +14,13 @@ export function buildListUrl({
     _per_page: String(perPage),
   });
 
+  if (assignmentId) {
+    params.set("assignment_id", assignmentId);
+    return `/api/shipments?${params.toString()}`;
+  }
+
   const trimmed = q?.trim();
-  if (trimmed) {
+  if (trimmed && status) {
     params.set(
       "_where",
       JSON.stringify({
@@ -25,7 +31,7 @@ export function buildListUrl({
         ],
       })
     );
-  } else {
+  } else if (status) {
     params.set("status", status);
   }
 

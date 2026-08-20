@@ -11,7 +11,6 @@ import { SHIPMENT_STATUSES } from "@/types/shipments";
 
 /**
  * Shipment page URL state: `q`, `status`, `shipmentId`.
- * Extend this schema for other pages (e.g. add `assignmentId`).
  */
 export const shipmentQueryParamSchema = {
   q: stringParam(),
@@ -23,4 +22,20 @@ export type ShipmentQueryParams = InferQueryParams<typeof shipmentQueryParamSche
 
 export function useShipmentQueryParams() {
   return useQueryParams(shipmentQueryParamSchema);
+}
+
+/**
+ * Assignment page URL state: `q`, `assignmentId`, `shipmentId`.
+ * Uses its own schema so `status` is not confused with shipment statuses.
+ */
+export const assignmentQueryParamSchema = {
+  q: stringParam(),
+  assignmentId: optionalStringParam(),
+  shipmentId: optionalStringParam(),
+};
+
+export type AssignmentQueryParams = InferQueryParams<typeof assignmentQueryParamSchema>;
+
+export function useAssignmentQueryParams() {
+  return useQueryParams(assignmentQueryParamSchema);
 }

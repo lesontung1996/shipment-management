@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/app/providers";
 import "./globals.css";
@@ -24,8 +25,29 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="h-full overflow-hidden">
-        <Providers>{children}</Providers>
+      <body className="flex h-full flex-col overflow-hidden">
+        <Providers>
+          <header className="flex h-11 shrink-0 items-center gap-4 border-b bg-background px-4">
+            <span className="text-sm font-semibold tracking-tight">
+              Shipment Management
+            </span>
+            <nav className="flex items-center gap-1 text-sm">
+              <Link
+                href="/"
+                className="rounded-md px-2.5 py-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                Shipments
+              </Link>
+              <Link
+                href="/assignments"
+                className="rounded-md px-2.5 py-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                Assignments
+              </Link>
+            </nav>
+          </header>
+          <main className="min-h-0 flex-1">{children}</main>
+        </Providers>
       </body>
     </html>
   );
