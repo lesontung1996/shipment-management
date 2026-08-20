@@ -1,3 +1,4 @@
+import { AssignmentStatus } from "@/types/assignments";
 import type { ShipmentStatus } from "@/types/shipments";
 
 export const shipmentStatusColorClass = {
@@ -29,6 +30,18 @@ export function shipmentStatusClassName(
   appearance: "solid" | "outline" = "solid"
 ) {
   return shipmentStatusColorClass[status][appearance];
+}
+
+export const assignmentStatusColorClass = {
+  OPEN: shipmentStatusColorClass.OPEN,
+  COMPLETED: shipmentStatusColorClass.DELIVERED,
+} as const satisfies Record<AssignmentStatus, { solid: string; outline: string }>;
+
+export function assignmentStatusClassName(
+  status: AssignmentStatus,
+  appearance: "solid" | "outline" = "solid"
+) {
+  return assignmentStatusColorClass[status][appearance];
 }
 
 const TRANSITIONS: Record<ShipmentStatus, readonly ShipmentStatus[]> = {

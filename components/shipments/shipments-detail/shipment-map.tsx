@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
 import { isValidCoordinate } from "@/lib/utils";
 
-const Map = dynamic(() => import("@/components/ui/map"), {
+const Map = dynamic(() => import("@/components/common/map"), {
   ssr: false,
   loading: () => <Skeleton className="h-64 w-full rounded-lg" />,
 });

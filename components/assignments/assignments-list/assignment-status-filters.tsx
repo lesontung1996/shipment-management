@@ -5,6 +5,7 @@ import {
   ASSIGNMENT_STATUSES,
   type AssignmentStatus,
 } from "@/types/assignments";
+import { assignmentStatusClassName } from "@/lib/shipment-status";
 
 type AssignmentStatusFiltersProps = {
   value: AssignmentStatus;
@@ -21,6 +22,7 @@ export function AssignmentStatusFilters({
       value={value}
       onChange={onChange}
       aria-label="Filter assignments by status"
+      statusClassName={assignmentStatusClassName}
     />
   );
 }
