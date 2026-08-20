@@ -2,14 +2,11 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { Badge } from "@/components/ui/badge";
-import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
-import { Skeleton } from "@/components/ui/skeleton";
+import { StatusGroupShell } from "@/components/common/status-group-shell";
 import { ShipmentRow } from "@/components/shipments/shipments-list/shipment-row";
 import { useShipmentsQuery } from "@/hooks/use-shipment-queries";
 import { formatStatus } from "@/lib/format";
 import { shipmentStatusClassName } from "@/lib/shipment-status";
-import { cn } from "@/lib/utils";
 import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
 import type { ShipmentStatus } from "@/types/shipments";
 
@@ -68,72 +65,50 @@ export function ShipmentStatusGroup({ status, q }: ShipmentStatusGroupProps) {
   ]);
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-      <div className="flex w-full shrink-0 items-center gap-2 px-3 py-2">
-        <span className="text-sm font-medium capitalize">
-          {formatStatus(status).toLowerCase()}
-        </span>
-        <Badge
-          variant="secondary"
-          className={cn(shipmentStatusClassName(status))}
+    <StatusGroupShell
+      statusLabel={formatStatus(status).toLowerCase()}
+      count={isPending ? "…" : total}
+      badgeClassName={shipmentStatusClassName(status)}
+      isPending={isPending}
+      isError={isError}
+      errorMessage={`Could not load ${formatStatus(status).toLowerCase()} shipments.`}
+      isEmpty={shipments.length === 0}
+      emptyTitle="No shipments"
+      emptyDescription={
+        q
+          ? "Nothing matches this search in this status."
+          : "No shipments in this status."
+      }
+    >
+      <div ref={parentRef} className="min-h-0 flex-1 overflow-auto">
+        <div
+          className="relative w-full"
+          style={{ height: virtualizer.getTotalSize() }}
         >
-          {isPending ? "…" : total}
-        </Badge>
+          {virtualItems.map((item) => {
+            const shipment = shipments[item.index];
+            if (!shipment) return null;
+            return (
+              <div
+                key={shipment.id}
+                className="absolute top-0 left-0 w-full"
+                style={{
+                  height: item.size,
+                  transform: `translateY(${item.start}px)`,
+                }}
+              >
+                <ShipmentRow
+                  shipment={shipment}
+                  selected={shipment.id === selectedShipmentId}
+                  onSelect={(id) =>
+                    setParams({ shipmentId: id }, { history: "push" })
+                  }
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-        {isPending ? (
-          <div className="flex flex-col gap-2 px-3 py-2">
-            {Array.from({ length: 4 }, (_, index) => (
-              <Skeleton key={index} className="h-14 w-full" />
-            ))}
-          </div>
-        ) : isError ? (
-          <p className="px-3 py-2 text-sm text-destructive">
-            Could not load {formatStatus(status).toLowerCase()} shipments.
-          </p>
-        ) : shipments.length === 0 ? (
-          <Empty className="border-0 py-4">
-            <EmptyHeader>
-              <EmptyTitle>No shipments</EmptyTitle>
-              <EmptyDescription>
-                {q
-                  ? "Nothing matches this search in this status."
-                  : "No shipments in this status."}
-              </EmptyDescription>
-            </EmptyHeader>
-          </Empty>
-        ) : (
-          <div ref={parentRef} className="min-h-0 flex-1 overflow-auto">
-            <div
-              className="relative w-full"
-              style={{ height: virtualizer.getTotalSize() }}
-            >
-              {virtualItems.map((item) => {
-                const shipment = shipments[item.index];
-                if (!shipment) return null;
-                return (
-                  <div
-                    key={shipment.id}
-                    className="absolute top-0 left-0 w-full"
-                    style={{
-                      height: item.size,
-                      transform: `translateY(${item.start}px)`,
-                    }}
-                  >
-                    <ShipmentRow
-                      shipment={shipment}
-                      selected={shipment.id === selectedShipmentId}
-                      onSelect={(id) =>
-                        setParams({ shipmentId: id }, { history: "push" })
-                      }
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+    </StatusGroupShell>
   );
 }

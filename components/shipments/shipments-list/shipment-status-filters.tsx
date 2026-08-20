@@ -1,9 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { formatStatus } from "@/lib/format";
+import { StatusFilters } from "@/components/common/status-filters";
 import { shipmentStatusClassName } from "@/lib/shipment-status";
-import { cn } from "@/lib/utils";
 import { SHIPMENT_STATUSES, type ShipmentStatus } from "@/types/shipments";
 
 type ShipmentStatusFiltersProps = {
@@ -16,31 +14,12 @@ export function ShipmentStatusFilters({
   onChange,
 }: ShipmentStatusFiltersProps) {
   return (
-    <div
-      role="radiogroup"
+    <StatusFilters
+      statuses={SHIPMENT_STATUSES}
+      value={value}
+      onChange={onChange}
       aria-label="Filter shipments by status"
-      className="grid grid-cols-3 gap-1.5"
-    >
-      {SHIPMENT_STATUSES.map((status) => {
-        const selected = status === value;
-        return (
-          <Button
-            key={status}
-            type="button"
-            size="sm"
-            variant="outline"
-            role="radio"
-            aria-checked={selected}
-            onClick={() => onChange(status)}
-            className={cn(
-              "px-1.5 text-[0.7rem] capitalize",
-              shipmentStatusClassName(status, selected ? "solid" : "outline")
-            )}
-          >
-            {formatStatus(status).toLowerCase()}
-          </Button>
-        );
-      })}
-    </div>
+      statusClassName={shipmentStatusClassName}
+    />
   );
 }

@@ -514,7 +514,7 @@
       "warehouse_id": "581",
       "lat": 32.87643568102964,
       "lng": -97.39346979283161,
-      "assignment_id": "as_002"
+      "assignment_id": "as_010"
     },
     {
       "id": "shp_050",
@@ -1013,13 +1013,14 @@
       "id": "shp_096",
       "client_name": "Logix",
       "label": "LAX-581-250526-96",
-      "status": "OPEN",
+      "status": "IN_TRANSIT",
       "arrival_date": "2026-08-08T10:28:10.981Z",
-      "delivery_by_date": "2026-08-10T10:28:10.981Z",
+      "delivery_by_date": "2026-08-10T10:28:00.000Z",
       "eta": "2026-08-09T08:28:10.981Z",
       "warehouse_id": "581",
       "lat": 33.0082492989416,
-      "lng": -96.76797766400452
+      "lng": -96.76797766400452,
+      "assignment_id": "as_018"
     },
     {
       "id": "shp_097",

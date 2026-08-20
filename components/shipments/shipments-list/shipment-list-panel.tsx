@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { NewShipmentDialog } from "@/components/shipments/ui/new-shipment-dialog";
-import { ShipmentSearch } from "@/components/shipments/shipments-list/shipment-search";
+import { SearchForm } from "@/components/common/search-form";
 import { ShipmentStatusFilters } from "@/components/shipments/shipments-list/shipment-status-filters";
 import { ShipmentStatusGroup } from "@/components/shipments/shipments-list/shipment-status-group";
 import { Separator } from "@/components/ui/separator";
@@ -31,7 +31,12 @@ export function ShipmentListPanel() {
           <h1 className="text-base font-semibold tracking-tight">Shipments</h1>
           <NewShipmentDialog />
         </div>
-        <ShipmentSearch value={search} onChange={setSearch} />
+        <SearchForm
+          value={search}
+          onChange={setSearch}
+          placeholder="Search by label or client"
+          aria-label="Search shipments by label or client name"
+        />
         <ShipmentStatusFilters
           value={params.status}
           onChange={(status: ShipmentStatus) => setParams({ status })}

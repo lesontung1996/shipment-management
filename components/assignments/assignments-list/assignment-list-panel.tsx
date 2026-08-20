@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { AssignmentStatusFilters } from "@/components/assignments/assignments-list/assignment-status-filters";
 import { AssignmentStatusGroup } from "@/components/assignments/assignments-list/assignment-status-group";
-import { ShipmentSearch } from "@/components/shipments/shipments-list/shipment-search";
+import { SearchForm } from "@/components/common/search-form";
 import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { useAssignmentsQuery } from "@/hooks/use-shipment-queries";
 import { useAssignmentQueryParams } from "@/hooks/use-shipment-query-params";
-import { ASSIGNMENT_STATUSES } from "@/types/shipments";
+import type { AssignmentStatus } from "@/types/shipments";
 
 export function AssignmentListPanel() {
   const { params, setParams } = useAssignmentQueryParams();
@@ -27,53 +27,38 @@ export function AssignmentListPanel() {
 
   const filtered = useMemo(() => {
     const q = params.q.trim().toLowerCase();
-    if (!q) return assignments;
-    return assignments.filter((assignment) =>
-      assignment.label.toLowerCase().includes(q)
-    );
-  }, [assignments, params.q]);
-
-  const grouped = useMemo(
-    () =>
-      ASSIGNMENT_STATUSES.map((status) => ({
-        status,
-        assignments: filtered.filter((assignment) => assignment.status === status),
-      })),
-    [filtered]
-  );
+    return assignments.filter((assignment) => {
+      if (assignment.status !== params.status) return false;
+      if (!q) return true;
+      return assignment.label.toLowerCase().includes(q);
+    });
+  }, [assignments, params.q, params.status]);
 
   return (
     <aside className="flex min-h-0 flex-col border-r bg-background">
       <div className="flex shrink-0 flex-col gap-3 p-3">
         <h1 className="text-base font-semibold tracking-tight">Assignments</h1>
-        <ShipmentSearch
+        <SearchForm
           value={search}
           onChange={setSearch}
           placeholder="Search by label"
           aria-label="Search assignments by label"
         />
+        <AssignmentStatusFilters
+          value={params.status}
+          onChange={(status: AssignmentStatus) => setParams({ status })}
+        />
       </div>
       <Separator />
-      <div className="flex min-h-0 flex-1 flex-col overflow-auto">
-        {isPending ? (
-          <div className="flex flex-col gap-2 px-3 py-2">
-            {Array.from({ length: 4 }, (_, index) => (
-              <Skeleton key={index} className="h-14 w-full" />
-            ))}
-          </div>
-        ) : isError ? (
-          <p className="px-3 py-2 text-sm text-destructive">
-            Could not load assignments.
-          </p>
-        ) : (
-          grouped.map(({ status, assignments: group }) => (
-            <AssignmentStatusGroup
-              key={status}
-              status={status}
-              assignments={group}
-            />
-          ))
-        )}
+      <div className="flex min-h-0 flex-1 flex-col">
+        <AssignmentStatusGroup
+          key={params.status}
+          status={params.status}
+          assignments={filtered}
+          isPending={isPending}
+          isError={isError}
+          q={params.q}
+        />
       </div>
     </aside>
   );

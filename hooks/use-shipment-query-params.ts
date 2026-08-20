@@ -7,7 +7,7 @@ import {
   optionalStringParam,
   type InferQueryParams,
 } from "@/lib/query-params";
-import { SHIPMENT_STATUSES } from "@/types/shipments";
+import { ASSIGNMENT_STATUSES, SHIPMENT_STATUSES } from "@/types/shipments";
 
 /**
  * Shipment page URL state: `q`, `status`, `shipmentId`.
@@ -25,11 +25,11 @@ export function useShipmentQueryParams() {
 }
 
 /**
- * Assignment page URL state: `q`, `assignmentId`, `shipmentId`.
- * Uses its own schema so `status` is not confused with shipment statuses.
+ * Assignment page URL state: `q`, `status`, `assignmentId`, `shipmentId`.
  */
 export const assignmentQueryParamSchema = {
   q: stringParam(),
+  status: enumParam(ASSIGNMENT_STATUSES, ASSIGNMENT_STATUSES[0]),
   assignmentId: optionalStringParam(),
   shipmentId: optionalStringParam(),
 };
