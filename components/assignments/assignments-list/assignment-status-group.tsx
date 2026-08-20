@@ -2,9 +2,9 @@
 
 import { StatusGroupShell } from "@/components/common/status-group-shell";
 import { AssignmentRow } from "@/components/assignments/assignments-list/assignment-row";
-import { useAssignmentQueryParams } from "@/hooks/use-shipment-query-params";
+import { useAssignmentQueryParams } from "@/hooks/use-query-params";
 import { formatStatus } from "@/lib/format";
-import type { Assignment, AssignmentStatus } from "@/types/shipments";
+import type { Assignment, AssignmentStatus } from "@/types/assignments";
 
 type AssignmentStatusGroupProps = {
   status: AssignmentStatus;

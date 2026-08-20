@@ -1,7 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { createElement } from "react";
-import type { Assignment, Shipment, ShipmentStatus } from "@/types/shipments";
+import type { Assignment } from "@/types/assignments";
+import type { Shipment, ShipmentStatus } from "@/types/shipments";
 import type { ShipmentFormValues } from "@/hooks/use-shipment-form";
 
 export function makeShipment(

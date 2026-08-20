@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import type { Assignment } from "@/types/shipments";
+import type { Assignment } from "@/types/assignments";
 
 type AssignmentRowProps = {
   assignment: Assignment;

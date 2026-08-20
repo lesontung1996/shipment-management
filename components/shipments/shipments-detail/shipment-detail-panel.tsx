@@ -1,7 +1,7 @@
 "use client";
 
 import { ShipmentDetailView } from "@/components/shipments/shipments-detail/shipment-detail-view";
-import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
+import { useShipmentQueryParams } from "@/hooks/use-query-params";
 
 export function ShipmentDetailPanel() {
   const { params } = useShipmentQueryParams();

@@ -7,7 +7,7 @@ import { ShipmentRow } from "@/components/shipments/shipments-list/shipment-row"
 import { useShipmentsQuery } from "@/hooks/use-shipment-queries";
 import { formatStatus } from "@/lib/format";
 import { shipmentStatusClassName } from "@/lib/shipment-status";
-import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
+import { useShipmentQueryParams } from "@/hooks/use-query-params";
 import type { ShipmentStatus } from "@/types/shipments";
 
 const ROW_HEIGHT = 64;

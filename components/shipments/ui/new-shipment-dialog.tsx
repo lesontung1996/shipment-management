@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
+import { useShipmentQueryParams } from "@/hooks/use-query-params";
 
 const FORM_ID = "new-shipment-form";
 

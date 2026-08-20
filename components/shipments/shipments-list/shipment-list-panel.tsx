@@ -7,7 +7,7 @@ import { ShipmentStatusFilters } from "@/components/shipments/shipments-list/shi
 import { ShipmentStatusGroup } from "@/components/shipments/shipments-list/shipment-status-group";
 import { Separator } from "@/components/ui/separator";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
-import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
+import { useShipmentQueryParams } from "@/hooks/use-query-params";
 import type { ShipmentStatus } from "@/types/shipments";
 
 export function ShipmentListPanel() {

@@ -11,7 +11,7 @@ import {
   ComboboxTrigger,
 } from "@/components/ui/combobox";
 import { AssignmentRow } from "@/components/assignments/assignments-list/assignment-row";
-import type { Assignment } from "@/types/shipments";
+import type { Assignment } from "@/types/assignments";
 
 type AssignmentComboboxProps = {
   assignments: Assignment[];

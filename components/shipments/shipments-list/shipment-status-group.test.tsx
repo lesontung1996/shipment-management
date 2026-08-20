@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ShipmentStatusGroup } from "@/components/shipments/shipments-list/shipment-status-group";
 import { useShipmentsQuery } from "@/hooks/use-shipment-queries";
-import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
+import { useShipmentQueryParams } from "@/hooks/use-query-params";
 import { makeShipment } from "@/test/fixtures";
 import type { PaginatedResponse } from "@/types";
 import type { Shipment } from "@/types/shipments";
@@ -12,7 +12,7 @@ vi.mock("@/hooks/use-shipment-queries", () => ({
   useShipmentsQuery: vi.fn(),
 }));
 
-vi.mock("@/hooks/use-shipment-query-params", () => ({
+vi.mock("@/hooks/use-query-params", () => ({
   useShipmentQueryParams: vi.fn(),
 }));
 

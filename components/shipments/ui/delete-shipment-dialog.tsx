@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useDeleteShipmentQuery } from "@/hooks/use-shipment-queries";
-import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
+import { useShipmentQueryParams } from "@/hooks/use-query-params";
 import type { Shipment } from "@/types/shipments";
 
 type DeleteShipmentDialogProps = {

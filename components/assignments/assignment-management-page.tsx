@@ -3,7 +3,7 @@
 import { AssignmentDetailPanel } from "@/components/assignments/assignments-detail/assignment-detail-panel";
 import { AssignmentListPanel } from "@/components/assignments/assignments-list/assignment-list-panel";
 import { ShipmentDetailView } from "@/components/shipments/shipments-detail/shipment-detail-view";
-import { useAssignmentQueryParams } from "@/hooks/use-shipment-query-params";
+import { useAssignmentQueryParams } from "@/hooks/use-query-params";
 
 export function AssignmentManagementPage() {
   const { params } = useAssignmentQueryParams();

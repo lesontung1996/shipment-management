@@ -7,8 +7,8 @@ import { SearchForm } from "@/components/common/search-form";
 import { Separator } from "@/components/ui/separator";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { useAssignmentsQuery } from "@/hooks/use-shipment-queries";
-import { useAssignmentQueryParams } from "@/hooks/use-shipment-query-params";
-import type { AssignmentStatus } from "@/types/shipments";
+import { useAssignmentQueryParams } from "@/hooks/use-query-params";
+import type { AssignmentStatus } from "@/types/assignments";
 
 export function AssignmentListPanel() {
   const { params, setParams } = useAssignmentQueryParams();

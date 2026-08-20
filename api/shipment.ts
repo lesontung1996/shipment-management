@@ -1,5 +1,5 @@
+import type { Assignment } from "@/types/assignments";
 import type {
-  Assignment,
   Shipment,
   ShipmentCreate,
   ShipmentUpdate,

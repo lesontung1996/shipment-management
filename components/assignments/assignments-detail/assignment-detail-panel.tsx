@@ -16,7 +16,7 @@ import {
   useAssignmentsQuery,
   useShipmentsByAssignmentQuery,
 } from "@/hooks/use-shipment-queries";
-import { useAssignmentQueryParams } from "@/hooks/use-shipment-query-params";
+import { useAssignmentQueryParams } from "@/hooks/use-query-params";
 import { formatStatus } from "@/lib/format";
 
 export function AssignmentDetailPanel() {

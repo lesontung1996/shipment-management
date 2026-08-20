@@ -4,7 +4,7 @@ import { StatusFilters } from "@/components/common/status-filters";
 import {
   ASSIGNMENT_STATUSES,
   type AssignmentStatus,
-} from "@/types/shipments";
+} from "@/types/assignments";
 
 type AssignmentStatusFiltersProps = {
   value: AssignmentStatus;
