@@ -3,13 +3,17 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ShipmentStatusGroup } from "@/components/shipments/shipments-list/shipment-status-group";
 import { useShipmentsQuery } from "@/hooks/use-shipment-queries";
-import { useShipmentStore } from "@/stores/shipment-store";
+import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
 import { makeShipment } from "@/test/fixtures";
 import type { PaginatedResponse } from "@/types";
 import type { Shipment } from "@/types/shipments";
 
 vi.mock("@/hooks/use-shipment-queries", () => ({
   useShipmentsQuery: vi.fn(),
+}));
+
+vi.mock("@/hooks/use-shipment-query-params", () => ({
+  useShipmentQueryParams: vi.fn(),
 }));
 
 vi.mock("@tanstack/react-virtual", () => ({
@@ -27,6 +31,7 @@ vi.mock("@tanstack/react-virtual", () => ({
 }));
 
 const useShipmentsQueryMock = vi.mocked(useShipmentsQuery);
+const useShipmentQueryParamsMock = vi.mocked(useShipmentQueryParams);
 
 function page(
   data: Shipment[],
@@ -58,9 +63,18 @@ function mockQuery(
 }
 
 describe("ShipmentStatusGroup", () => {
+  const setParams = vi.fn();
+
   beforeEach(() => {
-    useShipmentStore.setState({ selectedShipmentId: null });
     vi.clearAllMocks();
+    useShipmentQueryParamsMock.mockReturnValue({
+      params: {
+        q: "",
+        status: "OPEN",
+        shipmentId: null,
+      },
+      setParams,
+    });
   });
 
   it("shows an empty state when there are no shipments", () => {
@@ -101,7 +115,9 @@ describe("ShipmentStatusGroup", () => {
     expect(row).toHaveAttribute("aria-pressed", "false");
     await user.click(row);
 
-    expect(useShipmentStore.getState().selectedShipmentId).toBe(shipment.id);
-    expect(row).toHaveAttribute("aria-pressed", "true");
+    expect(setParams).toHaveBeenCalledWith(
+      { shipmentId: shipment.id },
+      { history: "push" }
+    );
   });
 });

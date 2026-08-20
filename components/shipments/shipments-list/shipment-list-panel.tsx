@@ -1,18 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NewShipmentDialog } from "@/components/shipments/ui/new-shipment-dialog";
 import { ShipmentSearch } from "@/components/shipments/shipments-list/shipment-search";
 import { ShipmentStatusFilters } from "@/components/shipments/shipments-list/shipment-status-filters";
 import { ShipmentStatusGroup } from "@/components/shipments/shipments-list/shipment-status-group";
 import { Separator } from "@/components/ui/separator";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
-import { SHIPMENT_STATUSES, type ShipmentStatus } from "@/types/shipments";
+import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
+import type { ShipmentStatus } from "@/types/shipments";
 
 export function ShipmentListPanel() {
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState<ShipmentStatus>(SHIPMENT_STATUSES[0]);
-  const q = useDebouncedValue(search.trim(), 300);
+  const { params, setParams } = useShipmentQueryParams();
+  const [search, setSearch] = useState(params.q);
+  const debouncedSearch = useDebouncedValue(search.trim(), 300);
+
+  useEffect(() => {
+    setSearch(params.q);
+  }, [params.q]);
+
+  useEffect(() => {
+    if (debouncedSearch === params.q) return;
+    setParams({ q: debouncedSearch });
+  }, [debouncedSearch, params.q, setParams]);
 
   return (
     <aside className="flex min-h-0 flex-col border-r bg-background">
@@ -22,11 +32,14 @@ export function ShipmentListPanel() {
           <NewShipmentDialog />
         </div>
         <ShipmentSearch value={search} onChange={setSearch} />
-        <ShipmentStatusFilters value={status} onChange={setStatus} />
+        <ShipmentStatusFilters
+          value={params.status}
+          onChange={(status: ShipmentStatus) => setParams({ status })}
+        />
       </div>
       <Separator />
       <div className="flex min-h-0 flex-1 flex-col">
-        <ShipmentStatusGroup key={status} status={status} q={q} />
+        <ShipmentStatusGroup key={params.status} status={params.status} q={params.q} />
       </div>
     </aside>
   );

@@ -19,10 +19,11 @@ import {
 } from "@/components/ui/empty";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useShipmentQuery } from "@/hooks/use-shipment-queries";
-import { useShipmentStore } from "@/stores/shipment-store";
+import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
 
 export function ShipmentDetailPanel() {
-  const selectedShipmentId = useShipmentStore((state) => state.selectedShipmentId);
+  const { params } = useShipmentQueryParams();
+  const selectedShipmentId = params.shipmentId;
   const { data: shipment, isPending, isError, isPlaceholderData } = useShipmentQuery(
     selectedShipmentId
   );

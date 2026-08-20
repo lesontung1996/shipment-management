@@ -12,15 +12,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useShipmentStore } from "@/stores/shipment-store";
+import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
 
 const FORM_ID = "new-shipment-form";
 
 export function NewShipmentDialog() {
   const [open, setOpen] = useState(false);
-  const setSelectedShipmentId = useShipmentStore(
-    (state) => state.setSelectedShipmentId
-  );
+  const { setParams } = useShipmentQueryParams();
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -38,7 +36,7 @@ export function NewShipmentDialog() {
           formId={FORM_ID}
           idPrefix="new-shipment"
           onSuccess={(shipment) => {
-            setSelectedShipmentId(shipment.id);
+            setParams({ shipmentId: shipment.id }, { history: "push" });
             setOpen(false);
           }}
           renderActions={({ canSubmit, isPending, isError }) => (

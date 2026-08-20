@@ -986,18 +986,6 @@
       "lng": -97.25824722804725
     },
     {
-      "id": "shp_093",
-      "client_name": "DHL",
-      "label": "SFO-581-250523-93",
-      "status": "OPEN",
-      "arrival_date": "2026-08-14T10:28:10.981Z",
-      "delivery_by_date": "2026-08-16T10:28:10.981Z",
-      "eta": "2026-08-14T15:28:10.981Z",
-      "warehouse_id": "581",
-      "lat": 32.751955383742605,
-      "lng": -97.35969353913242
-    },
-    {
       "id": "shp_094",
       "client_name": "CargoTrans",
       "label": "SEA-581-250524-94",

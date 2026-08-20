@@ -10,8 +10,8 @@ import { useShipmentsQuery } from "@/hooks/use-shipment-queries";
 import { formatStatus } from "@/lib/format";
 import { shipmentStatusClassName } from "@/lib/shipment-status";
 import { cn } from "@/lib/utils";
+import { useShipmentQueryParams } from "@/hooks/use-shipment-query-params";
 import type { ShipmentStatus } from "@/types/shipments";
-import { useShipmentStore } from "@/stores/shipment-store";
 
 const ROW_HEIGHT = 64;
 
@@ -22,10 +22,8 @@ type ShipmentStatusGroupProps = {
 
 export function ShipmentStatusGroup({ status, q }: ShipmentStatusGroupProps) {
   const parentRef = useRef<HTMLDivElement>(null);
-  const selectedShipmentId = useShipmentStore((state) => state.selectedShipmentId);
-  const setSelectedShipmentId = useShipmentStore(
-    (state) => state.setSelectedShipmentId
-  );
+  const { params, setParams } = useShipmentQueryParams();
+  const selectedShipmentId = params.shipmentId;
 
   const {
     data,
@@ -125,7 +123,9 @@ export function ShipmentStatusGroup({ status, q }: ShipmentStatusGroupProps) {
                     <ShipmentRow
                       shipment={shipment}
                       selected={shipment.id === selectedShipmentId}
-                      onSelect={setSelectedShipmentId}
+                      onSelect={(id) =>
+                        setParams({ shipmentId: id }, { history: "push" })
+                      }
                     />
                   </div>
                 );
