@@ -1,6 +1,7 @@
 "use client";
 
 import { Package } from "lucide-react";
+import type { MapPoint } from "@/components/common/map";
 import { ShipmentForm } from "@/components/shipments/shipments-detail/shipment-form";
 import { ShipmentMap } from "@/components/shipments/shipments-detail/shipment-map";
 import {
@@ -23,11 +24,14 @@ import { useShipmentQuery } from "@/hooks/use-shipment-queries";
 type ShipmentDetailViewProps = {
   shipmentId: string | null;
   emptyDescription?: string;
+  /** Assignment route points for the multi-shipment map view. */
+  routePoints?: MapPoint[];
 };
 
 export function ShipmentDetailView({
   shipmentId,
   emptyDescription = "Choose a shipment from the list to view its details.",
+  routePoints,
 }: ShipmentDetailViewProps) {
   const { data: shipment, isPending, isError, isPlaceholderData } =
     useShipmentQuery(shipmentId);
@@ -78,9 +82,11 @@ export function ShipmentDetailView({
         </CardHeader>
         <CardContent className="flex flex-col gap-5">
           <ShipmentMap
+            shipmentId={shipment.id}
             lat={shipment.lat}
             lng={shipment.lng}
             label={shipment.label}
+            routePoints={routePoints}
           />
           <ShipmentForm key={shipment.id} shipment={shipment} />
         </CardContent>
