@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/app/providers";
+import { NavLinks } from "@/components/common/nav-links";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,20 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <span className="text-sm font-semibold tracking-tight">
               Shipment Management
             </span>
-            <nav className="flex items-center gap-1 text-sm">
-              <Link
-                href="/"
-                className="rounded-md px-2.5 py-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                Shipments
-              </Link>
-              <Link
-                href="/assignments"
-                className="rounded-md px-2.5 py-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                Assignments
-              </Link>
-            </nav>
+            <NavLinks />
           </header>
           <main className="min-h-0 flex-1">{children}</main>
         </Providers>
